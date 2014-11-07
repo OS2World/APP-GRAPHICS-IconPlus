@@ -1,0 +1,23 @@
+History of changes
+
+Version 1.1.0
+
+   upd: Icon Plus can repack an icon file and optimise its
+        content for OS/2.
+   upd: Converting an icons with alpha map to OS/2 format
+        became more accurate.
+
+Version 1.0.2
+
+   upd: The sources now can be compiled via Open Watcom C++.
+   upd: Icon Plus is now covered by the GPL.
+   upd: Icon Plus is now can extract one specified icon from
+        icon library.
+
+Version 1.0.1
+
+   upd: Icon Plus now can read and save Windows XP icons.
+
+Version 1.0.0
+ 
+   First public release.
