@@ -1,0 +1,16 @@
+DFLAGS = -nocdsm -db ic_docs.db
+
+include depends
+
+all:
+  -@erase *.html
+  -@erase *.db
+   @ccdoc $(DFLAGS) $(DOCCLS)
+   @ccdoc $(DFLAGS) $(DOCCFG) -pkg "Configuration"
+   @ccdoc -db ic_docs.db -index
+   @echo  Generating documentation...
+   @ccdoc -db ic_docs.db -root ICPlus -norptsci -rptdefa "Dmitry A.Steklenev" -norptdpv -rptmac1 -rptpro -bg \"#FFFFFF\" -fg \"#000000\" -html ./ -srcurl ./
+
+clean:
+  -@erase *.db
+  -@erase *.html

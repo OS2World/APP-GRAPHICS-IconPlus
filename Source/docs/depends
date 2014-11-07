@@ -1,0 +1,5 @@
+DOCCFG = ../ic_config.h
+DOCCL0 = ../ic_bitmap.h ../ic_chlist.h ../ic_file.h ../ic_icl.h ../ic_icon.h
+DOCCL1 = ../ic_os2.h ../ic_palette.h ../ic_windows.h
+
+DOCCLS = $(DOCCL0) $(DOCCL1)

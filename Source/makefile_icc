@@ -1,0 +1,28 @@
+# This file is makefile (part of Icon Plus)
+CC = icc
+CFLAGS = -O -Q -DIC_GETOPT_NEEDED -Ios
+
+!if "$(OS)" == "OS2" || "$(OS)" == "ECS" || "$(OS2_SHELL)" != ""
+OS = OS2
+!endif
+!if "$(OS)" == "W32" || "$(OS)" == "Windows_NT" || "$(WINBOOTDIR)" != "" 
+OS = W32
+!endif
+
+BINDIR = ..\Bin
+OBJ    = .obj
+
+all: $(BINDIR)\$(OS)\icplus.exe
+
+include depends
+
+OBJFILES = $(OBJFILES) getopt.obj
+
+$(BINDIR)\$(OS)\icplus.exe: $(OBJFILES)
+	$(CC) $(CFLAGS) -Fe $@ $(OBJFILES)
+
+getopt.obj: os\getopt.c
+	$(CC) $(CFLAGS) /c $** -Fo $@
+
+clean: 
+	-erase *.o*

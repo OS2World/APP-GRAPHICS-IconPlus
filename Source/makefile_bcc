@@ -1,0 +1,23 @@
+# This file is makefile (part of Icon Plus)
+CC = bcc32
+CPPFLAGS = -q -WM -DIC_GETOPT_NEEDED -D__TOS_WIN__ -Ios
+OS = W32
+
+BINDIR = ..\Bin
+OBJ    = .obj
+
+all: $(BINDIR)\$(OS)\icplus.exe
+
+!include depends
+
+OBJFILES = $(OBJFILES) getopt.obj
+
+$(BINDIR)\$(OS)\icplus.exe: $(OBJFILES)
+	$(CC) $(CPPFLAGS) -e$@ $(OBJFILES)
+
+getopt.obj: os\getopt.c
+	$(CC) $(CPPFLAGS) -w-par -c $** -Fo $@
+
+clean: 
+	-erase *.o*
+        -erase $(BINDIR)\$(OS)\*.tds

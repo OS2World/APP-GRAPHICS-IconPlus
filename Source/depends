@@ -1,0 +1,23 @@
+OBJFILE0 = ic_main$(OBJ) ic_palette$(OBJ) ic_bitmap$(OBJ) ic_icon$(OBJ) 
+OBJFILE1 = ic_file$(OBJ) ic_chlist$(OBJ) ic_os2$(OBJ) ic_windows$(OBJ)
+OBJFILE2 = ic_icl$(OBJ)
+
+OBJFILES = $(OBJFILE0) $(OBJFILE1) $(OBJFILE2)
+
+ic_palette.h:    ic_config.h
+ic_bitmap.h:     ic_config.h
+ic_file.h:       ic_config.h
+ic_os2.h:        ic_config.h ic_palette.h ic_bitmap.h ic_file.h
+ic_windows.h:    ic_config.h ic_palette.h ic_bitmap.h ic_file.h
+ic_icl.h:        ic_chlist.h ic_windows.h
+ic_icon.h:       ic_bitmap.h ic_palette.h
+
+ic_main.cpp:     ic_icon.h ic_os2.h ic_icl.h
+ic_os2.cpp:      ic_icon.h ic_os2.h
+ic_windows.cpp:  ic_icon.h ic_windows.h
+ic_icl.cpp:      ic_icl.h
+ic_palette.cpp:  ic_palette.h
+ic_bitmap.cpp:   ic_bitmap.h
+ic_icon.cpp:     ic_icon.h
+ic_file.cpp:     ic_file.h
+ic_chlist.cpp:   ic_chlist.h

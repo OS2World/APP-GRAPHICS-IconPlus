@@ -1,0 +1,34 @@
+# This file is makefile (part of Icon Plus)
+CC = wcl386
+
+!if "$(%OS)" == "OS2" || "$(%OS)" == "ECS" || "$(%OS2_SHELL)" != ""
+OS = OS2
+CFLAGS = /zq /dIC_GETOPT_NEEDED /ios /d__TOS_OS2__
+!endif
+
+!if "$(%OS)" == "W32" || "$(%OS)" == "Windows_NT" || "$(%WINBOOTDIR)" != "" 
+OS = W32
+CFLAGS = /zq /dIC_GETOPT_NEEDED /ios /d__TOS_WIN__
+!endif
+
+BINDIR = ..\Bin
+OBJ    = .obj
+
+.default
+	@wtouch -c $@
+
+.cpp.obj: 
+	$(CC) $(CFLAGS) /c $[@
+
+all: $(BINDIR)\$(OS)\icplus.exe .symbolic
+
+!include depends
+
+$(BINDIR)\$(OS)\icplus.exe: $(OBJFILES) getopt.obj
+	$(CC) $(CFLAGS) /fe=$^@ $(OBJFILES) getopt.obj
+
+getopt.obj: os\getopt.c
+	$(CC) $(CFLAGS) /c $[@ /fo=$^@
+
+clean: .symbolic
+	-erase *.o*
